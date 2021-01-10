@@ -1,0 +1,31 @@
+/*
+问题描述：有A，B，C，三个座，A座上有n个盘子，盘子大小不等，大的在下小的在上，将n个盘子从A移动到C
+输入数据：盘子个数n
+输出要求：输出移动的步骤，每行一步，如从A移动到C，输出“A->C”
+*/
+#include <iostream>
+using namespace std;
+
+//将src座上的n个盘子以mid座为中转，移动到dest座
+void Hanoi(int n, char src, char mid, char dest) {
+	//情况1：当只有一个盘子时直接将盘子从src移动到dest即可
+	if (n == 1) {
+		cout << src << "->" << dest << endl;
+		return;//递归终止
+	}
+	//情况2：盘子数大于1
+	//先将n-1个盘子从src移动到mid
+	Hanoi(n - 1, src, dest, mid);
+	//再将一个盘子从src移动到dest
+	cout << src << "->" << dest << endl;
+	//最后将n-1个盘子从mid移动到dest
+	Hanoi(n - 1, mid, src, dest);
+	return;
+}
+
+int main() {
+	int n;
+	cin >> n;
+	Hanoi(n, 'A', 'B', 'C');
+	return 0;
+}
